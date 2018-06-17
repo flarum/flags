@@ -26,6 +26,6 @@ app.initializers.add('flarum-flags', () => {
 
 // Expose compat API
 import flagsCompat from './compat';
-import { compat } from 'flarum';
+import { compat } from '@flarum/core/admin';
 
 Object.assign(compat, flagsCompat);
