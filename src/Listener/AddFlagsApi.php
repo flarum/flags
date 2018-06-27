@@ -51,7 +51,7 @@ class AddFlagsApi
     public function configureModelDates(ConfigureModelDates $event)
     {
         if ($event->isModel(User::class)) {
-            $event->dates[] = 'flags_read_time';
+            $event->dates[] = 'read_flags_at';
         }
     }
 
@@ -96,8 +96,8 @@ class AddFlagsApi
     {
         $query = Flag::whereVisibleTo($actor);
 
-        if ($time = $actor->flags_read_time) {
-            $query->where('flags.time', '>', $time);
+        if ($time = $actor->read_flags_at) {
+            $query->where('flags.created_at', '>', $time);
         }
 
         return $query->distinct()->count('flags.post_id');
