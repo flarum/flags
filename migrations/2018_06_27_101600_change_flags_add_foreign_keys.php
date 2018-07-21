@@ -19,14 +19,14 @@ return [
         $schema->getConnection()
             ->table('flags')
             ->whereNotExists(function ($query) {
-                $query->selectRaw(1)->from('posts')->whereRaw('id = post_id');
+                $query->selectRaw(1)->from('posts')->whereColumn('id', 'post_id');
             })
             ->delete();
 
         $schema->getConnection()
             ->table('flags')
             ->whereNotExists(function ($query) {
-                $query->selectRaw(1)->from('users')->whereRaw('id = user_id');
+                $query->selectRaw(1)->from('users')->whereColumn('id', 'user_id');
             })
             ->update(['user_id' => null]);
 
