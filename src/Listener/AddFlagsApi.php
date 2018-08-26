@@ -64,7 +64,7 @@ class AddFlagsApi
             $event->attributes['canViewFlags'] = $event->actor->hasPermissionLike('discussion.viewFlags');
 
             if ($event->attributes['canViewFlags']) {
-                $event->attributes['flagsCount'] = (int) $this->getFlagsCount($event->actor);
+                $event->attributes['flagCount'] = (int) $this->getFlagCount($event->actor);
             }
 
             $event->attributes['guidelinesUrl'] = $this->settings->get('flarum-flags.guidelines_url');
@@ -83,7 +83,7 @@ class AddFlagsApi
      * @param User $actor
      * @return int
      */
-    protected function getFlagsCount(User $actor)
+    protected function getFlagCount(User $actor)
     {
         return Flag::whereVisibleTo($actor)->distinct()->count('flags.post_id');
     }

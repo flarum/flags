@@ -21,7 +21,7 @@ export default class FlagsDropdown extends NotificationsDropdown {
   }
 
   getUnreadCount() {
-    return app.cache.flags ? app.cache.flags.length : app.forum.attribute('flagsCount');
+    return app.cache.flags ? app.cache.flags.length : app.forum.attribute('flagCount');
   }
 
   getNewCount() {
