@@ -25,6 +25,6 @@ export default class FlagsDropdown extends NotificationsDropdown {
   }
 
   getNewCount() {
-    return app.session.user.attribute('newFlagsCount');
+    return app.session.user.attribute('newFlagCount');
   }
 }

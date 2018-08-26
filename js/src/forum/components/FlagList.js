@@ -63,7 +63,7 @@ export default class FlagList extends Component {
    * been loaded.
    */
   load() {
-    if (app.cache.flags && !app.session.user.attribute('newFlagsCount')) {
+    if (app.cache.flags && !app.session.user.attribute('newFlagCount')) {
       return;
     }
 
@@ -72,7 +72,7 @@ export default class FlagList extends Component {
 
     app.store.find('flags')
       .then(flags => {
-        app.session.user.pushAttributes({newFlagsCount: 0});
+        app.session.user.pushAttributes({newFlagCount: 0});
         app.cache.flags = flags.sort((a, b) => b.createdAt() - a.createdAt());
       })
       .catch(() => {})

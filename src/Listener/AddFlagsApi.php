@@ -71,7 +71,7 @@ class AddFlagsApi
         }
 
         if ($event->isSerializer(CurrentUserSerializer::class)) {
-            $event->attributes['newFlagsCount'] = (int) $this->getNewFlagsCount($event->model);
+            $event->attributes['newFlagCount'] = (int) $this->getNewFlagCount($event->model);
         }
 
         if ($event->isSerializer(PostSerializer::class)) {
@@ -92,7 +92,7 @@ class AddFlagsApi
      * @param User $actor
      * @return int
      */
-    protected function getNewFlagsCount(User $actor)
+    protected function getNewFlagCount(User $actor)
     {
         $query = Flag::whereVisibleTo($actor);
 
