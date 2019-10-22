@@ -44,6 +44,7 @@ class AddFlagsApiAttributes
             }
 
             $event->attributes['guidelinesUrl'] = $this->settings->get('flarum-flags.guidelines_url');
+            $event->attributes['canFlagOwn'] = $this->settings->get('flarum-flags.can_flag_own');
         }
 
         if ($event->isSerializer(CurrentUserSerializer::class)) {

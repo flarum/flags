@@ -1,2 +1,344 @@
-module.exports=function(t){var n={};function e(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return t[r].call(o.exports,o,o.exports,e),o.l=!0,o.exports}return e.m=t,e.c=n,e.d=function(t,n,r){e.o(t,n)||Object.defineProperty(t,n,{enumerable:!0,get:r})},e.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},e.t=function(t,n){if(1&n&&(t=e(t)),8&n)return t;if(4&n&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(e.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&n&&"string"!=typeof t)for(var o in t)e.d(r,o,function(n){return t[n]}.bind(null,o));return r},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,n){return Object.prototype.hasOwnProperty.call(t,n)},e.p="",e(e.s=23)}([function(t,n){t.exports=flarum.core.compat.app},function(t,n,e){"use strict";function r(t,n){t.prototype=Object.create(n.prototype),t.prototype.constructor=t,t.__proto__=n}e.d(n,"a",function(){return r})},function(t,n){t.exports=flarum.core.compat.extend},,function(t,n,e){"use strict";function r(){return(r=Object.assign||function(t){for(var n=1;n<arguments.length;n++){var e=arguments[n];for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&(t[r]=e[r])}return t}).apply(this,arguments)}e.d(n,"a",function(){return r})},,,function(t,n){t.exports=flarum.core},,function(t,n){t.exports=flarum.core.compat["components/PermissionGrid"]},,,,,,,,,,,,function(t,n){t.exports=flarum.core.compat["components/SettingsModal"]},,function(t,n,e){"use strict";e.r(n);var r=e(4),o=e(2),a=e(0),s=e.n(a),i=e(9),l=e.n(i),u=e(1),f=e(21),c=function(t){function n(){return t.apply(this,arguments)||this}Object(u.a)(n,t);var e=n.prototype;return e.className=function(){return"FlagsSettingsModal Modal--small"},e.title=function(){return app.translator.trans("flarum-flags.admin.settings.title")},e.form=function(){return[m("div",{className:"Form-group"},m("label",null,app.translator.trans("flarum-flags.admin.settings.guidelines_url_label")),m("input",{className:"FormControl",bidi:this.setting("flarum-flags.guidelines_url")}))]},n}(e.n(f).a),p={"flags/components/FlagsSettingsModal":c},d=e(7);s.a.initializers.add("flarum-flags",function(){s.a.extensionSettings["flarum-flags"]=function(){return s.a.modal.show(new c)},Object(o.extend)(l.a.prototype,"moderateItems",function(t){t.add("viewFlags",{icon:"fas fa-flag",label:s.a.translator.trans("flarum-flags.admin.permissions.view_flags_label"),permission:"discussion.viewFlags"},65)}),Object(o.extend)(l.a.prototype,"replyItems",function(t){t.add("flagPosts",{icon:"fas fa-flag",label:s.a.translator.trans("flarum-flags.admin.permissions.flag_posts_label"),permission:"discussion.flagPosts"},70)})}),Object(r.a)(d.compat,p)}]);
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./admin.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./admin.js":
+/*!******************!*\
+  !*** ./admin.js ***!
+  \******************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_admin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/admin */ "./src/admin/index.js");
+/* empty/unused harmony star reexport *//*
+ * This file is part of Flarum.
+ *
+ * (c) Toby Zerner <toby.zerner@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _inheritsLoose; });
+function _inheritsLoose(subClass, superClass) {
+  subClass.prototype = Object.create(superClass.prototype);
+  subClass.prototype.constructor = subClass;
+  subClass.__proto__ = superClass;
+}
+
+/***/ }),
+
+/***/ "./src/admin/compat.js":
+/*!*****************************!*\
+  !*** ./src/admin/compat.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_FlagsSettingsModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/FlagsSettingsModal */ "./src/admin/components/FlagsSettingsModal.js");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  'flags/components/FlagsSettingsModal': _components_FlagsSettingsModal__WEBPACK_IMPORTED_MODULE_0__["default"]
+});
+
+/***/ }),
+
+/***/ "./src/admin/components/FlagsSettingsModal.js":
+/*!****************************************************!*\
+  !*** ./src/admin/components/FlagsSettingsModal.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FlagsSettingsModal; });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var flarum_components_SettingsModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/SettingsModal */ "flarum/components/SettingsModal");
+/* harmony import */ var flarum_components_SettingsModal__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_SettingsModal__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var FlagsSettingsModal =
+/*#__PURE__*/
+function (_SettingsModal) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(FlagsSettingsModal, _SettingsModal);
+
+  function FlagsSettingsModal() {
+    return _SettingsModal.apply(this, arguments) || this;
+  }
+
+  var _proto = FlagsSettingsModal.prototype;
+
+  _proto.className = function className() {
+    return 'FlagsSettingsModal Modal--small';
+  };
+
+  _proto.title = function title() {
+    return app.translator.trans('flarum-flags.admin.settings.title');
+  };
+
+  _proto.form = function form() {
+    return [m("div", {
+      className: "Form-group"
+    }, m("label", null, app.translator.trans('flarum-flags.admin.settings.guidelines_url_label')), m("input", {
+      className: "FormControl",
+      bidi: this.setting('flarum-flags.guidelines_url')
+    })), m("div", {
+      className: "Form-group"
+    }, m("label", {
+      className: "checkbox"
+    }, m("input", {
+      type: "checkbox",
+      bidi: this.setting('flarum-flags.can_flag_own')
+    }), app.translator.trans('flarum-flags.admin.settings.user_can_flag_own_posts')))];
+  };
+
+  return FlagsSettingsModal;
+}(flarum_components_SettingsModal__WEBPACK_IMPORTED_MODULE_1___default.a);
+
+
+
+/***/ }),
+
+/***/ "./src/admin/index.js":
+/*!****************************!*\
+  !*** ./src/admin/index.js ***!
+  \****************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/extend */ "flarum/extend");
+/* harmony import */ var flarum_extend__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_extend__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/app */ "flarum/app");
+/* harmony import */ var flarum_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_app__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_components_PermissionGrid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/components/PermissionGrid */ "flarum/components/PermissionGrid");
+/* harmony import */ var flarum_components_PermissionGrid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_components_PermissionGrid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_FlagsSettingsModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/FlagsSettingsModal */ "./src/admin/components/FlagsSettingsModal.js");
+/* harmony import */ var _compat__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./compat */ "./src/admin/compat.js");
+/* harmony import */ var _flarum_core_admin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @flarum/core/admin */ "@flarum/core/forum");
+/* harmony import */ var _flarum_core_admin__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_flarum_core_admin__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+flarum_app__WEBPACK_IMPORTED_MODULE_2___default.a.initializers.add('flarum-flags', function () {
+  flarum_app__WEBPACK_IMPORTED_MODULE_2___default.a.extensionSettings['flarum-flags'] = function () {
+    return flarum_app__WEBPACK_IMPORTED_MODULE_2___default.a.modal.show(new _components_FlagsSettingsModal__WEBPACK_IMPORTED_MODULE_4__["default"]());
+  };
+
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_components_PermissionGrid__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'moderateItems', function (items) {
+    items.add('viewFlags', {
+      icon: 'fas fa-flag',
+      label: flarum_app__WEBPACK_IMPORTED_MODULE_2___default.a.translator.trans('flarum-flags.admin.permissions.view_flags_label'),
+      permission: 'discussion.viewFlags'
+    }, 65);
+  });
+  Object(flarum_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_components_PermissionGrid__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'replyItems', function (items) {
+    items.add('flagPosts', {
+      icon: 'fas fa-flag',
+      label: flarum_app__WEBPACK_IMPORTED_MODULE_2___default.a.translator.trans('flarum-flags.admin.permissions.flag_posts_label'),
+      permission: 'discussion.flagPosts'
+    }, 70);
+  });
+}); // Expose compat API
+
+
+
+
+Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])(_flarum_core_admin__WEBPACK_IMPORTED_MODULE_6__["compat"], _compat__WEBPACK_IMPORTED_MODULE_5__["default"]);
+
+/***/ }),
+
+/***/ "@flarum/core/forum":
+/*!******************************!*\
+  !*** external "flarum.core" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core;
+
+/***/ }),
+
+/***/ "flarum/app":
+/*!********************************************!*\
+  !*** external "flarum.core.compat['app']" ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['app'];
+
+/***/ }),
+
+/***/ "flarum/components/PermissionGrid":
+/*!******************************************************************!*\
+  !*** external "flarum.core.compat['components/PermissionGrid']" ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['components/PermissionGrid'];
+
+/***/ }),
+
+/***/ "flarum/components/SettingsModal":
+/*!*****************************************************************!*\
+  !*** external "flarum.core.compat['components/SettingsModal']" ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['components/SettingsModal'];
+
+/***/ }),
+
+/***/ "flarum/extend":
+/*!***********************************************!*\
+  !*** external "flarum.core.compat['extend']" ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['extend'];
+
+/***/ })
+
+/******/ });
 //# sourceMappingURL=admin.js.map
