@@ -182,7 +182,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   Object(flarum_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_utils_PostControls__WEBPACK_IMPORTED_MODULE_2___default.a, 'userControls', function (items, post) {
-    console.log(flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('canFlagOwn'));
     if (post.isHidden() || post.contentType() !== 'comment' || !post.canFlag() || post.user() === flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.session.user && !Number(flarum_app__WEBPACK_IMPORTED_MODULE_1___default.a.forum.attribute('canFlagOwn'))) return;
     items.add('flag', m(flarum_components_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
       icon: "fas fa-flag",

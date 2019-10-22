@@ -7,7 +7,6 @@ import FlagPostModal from './components/FlagPostModal';
 
 export default function() {
   extend(PostControls, 'userControls', function(items, post) {
-    console.log(app.forum.attribute('canFlagOwn'));
     if (post.isHidden() || post.contentType() !== 'comment' || !post.canFlag() || post.user() === app.session.user && !Number(app.forum.attribute('canFlagOwn'))) return;
 
     items.add('flag',
