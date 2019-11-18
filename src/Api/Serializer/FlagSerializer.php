@@ -22,8 +22,7 @@ class FlagSerializer extends AbstractSerializer
      * {@inheritdoc}
      */
     protected $type = 'flags';
-
-
+    
     /**
      * @var TranslatorInterface
      */
@@ -81,6 +80,10 @@ class FlagSerializer extends AbstractSerializer
         return $name;
     }
 
+    /**
+     * @param string $name
+     * @return string
+     */
     private function translateReasonDetail($name)
     {
         $translation = $this->translator->trans($key = 'flarum-flags.forum.flag_post.reason_'.strtolower($name).'_text');
