@@ -14,6 +14,7 @@ namespace Flarum\Flags\Api\Serializer;
 use Flarum\Api\Serializer\AbstractSerializer;
 use Flarum\Api\Serializer\BasicUserSerializer;
 use Flarum\Api\Serializer\PostSerializer;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class FlagSerializer extends AbstractSerializer
 {
@@ -22,6 +23,20 @@ class FlagSerializer extends AbstractSerializer
      */
     protected $type = 'flags';
 
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -29,8 +44,8 @@ class FlagSerializer extends AbstractSerializer
     {
         return [
             'type'         => $flag->type,
-            'reason'       => $flag->reason,
-            'reasonDetail' => $flag->reason_detail,
+            'reason'       => $this->translateReasonName($flag->reason),
+            'reasonDetail' => $this->translateReasonDetail($flag->reason_detail),
             'createdAt'    => $this->formatDate($flag->created_at),
         ];
     }
@@ -49,5 +64,31 @@ class FlagSerializer extends AbstractSerializer
     protected function user($flag)
     {
         return $this->hasOne($flag, BasicUserSerializer::class);
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    private function translateReasonName($name)
+    {
+        $translation = $this->translator->trans($key = 'flarum-flags.forum.flag_post.reason_'.strtolower($name).'_label');
+
+        if ($translation !== $key) {
+            return $translation;
+        }
+
+        return $name;
+    }
+
+    private function translateReasonDetail($name)
+    {
+        $translation = $this->translator->trans($key = 'flarum-flags.forum.flag_post.reason_'.strtolower($name).'_text');
+
+        if ($translation !== $key) {
+            return $translation;
+        }
+
+        return $name;
     }
 }
