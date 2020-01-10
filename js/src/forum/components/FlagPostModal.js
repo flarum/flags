@@ -47,10 +47,7 @@ export default class FlagPostModal extends Modal {
                 <strong>{app.translator.trans('flarum-flags.forum.flag_post.reason_off_topic_label')}</strong>
                 {app.translator.trans('flarum-flags.forum.flag_post.reason_off_topic_text')}
                 {this.reason() === 'off_topic' ? (
-                  <div>
-                    <label>{app.translator.trans('flarum-flags.forum.flag_post.optional_details')}</label>
-                    <textarea className="FormControl" value={this.reasonDetail()} oninput={m.withAttr('value', this.reasonDetail)}></textarea>
-                  </div>
+                  <textarea className="FormControl" placeholder={app.translator.trans('flarum-flags.forum.flag_post.optional_details')} value={this.reasonDetail()} oninput={m.withAttr('value', this.reasonDetail)}></textarea>
                 ) : ''}
               </label>
 
@@ -61,10 +58,7 @@ export default class FlagPostModal extends Modal {
                   a: guidelinesUrl ? <a href={guidelinesUrl} target="_blank"/> : undefined
                 })}
                 {this.reason() === 'inappropriate' ? (
-                  <div>
-                    <label>{app.translator.trans('flarum-flags.forum.flag_post.optional_details')}</label>
-                    <textarea className="FormControl" value={this.reasonDetail()} oninput={m.withAttr('value', this.reasonDetail)}></textarea>
-                  </div>
+                  <textarea className="FormControl" placeholder={app.translator.trans('flarum-flags.forum.flag_post.optional_details')} value={this.reasonDetail()} oninput={m.withAttr('value', this.reasonDetail)}></textarea>
                 ) : ''}
               </label>
 
@@ -73,10 +67,7 @@ export default class FlagPostModal extends Modal {
                 <strong>{app.translator.trans('flarum-flags.forum.flag_post.reason_spam_label')}</strong>
                 {app.translator.trans('flarum-flags.forum.flag_post.reason_spam_text')}
                 {this.reason() === 'spam' ? (
-                  <div>
-                    <label>{app.translator.trans('flarum-flags.forum.flag_post.optional_details')}</label>
-                    <textarea className="FormControl" value={this.reasonDetail()} oninput={m.withAttr('value', this.reasonDetail)}></textarea>
-                  </div>
+                  <textarea className="FormControl" placeholder={app.translator.trans('flarum-flags.forum.flag_post.optional_details')} value={this.reasonDetail()} oninput={m.withAttr('value', this.reasonDetail)}></textarea>
                 ) : ''}
               </label>
 
@@ -116,9 +107,17 @@ export default class FlagPostModal extends Modal {
         user: app.session.user,
         post: this.props.post
       }
-    })
+    }, {errorHandler: this.onerror.bind(this)})
       .then(() => this.success = true)
       .catch(() => {})
       .then(this.loaded.bind(this));
+  }
+
+  onerror(error) {
+    if (error.status === 422) {
+      error.alert.props.children = app.translator.trans('flarum-flags.forum.flag_post.reason-needed');
+    }
+
+    super.onerror(error);
   }
 }
