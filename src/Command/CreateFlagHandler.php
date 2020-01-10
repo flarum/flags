@@ -3,10 +3,8 @@
 /*
  * This file is part of Flarum.
  *
- * (c) Toby Zerner <toby.zerner@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * For detailed copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
  */
 
 namespace Flarum\Flags\Command;
@@ -28,7 +26,7 @@ class CreateFlagHandler
      */
     protected $posts;
 
-        /**
+    /**
      * @var TranslatorInterface
      */
     protected $translator;
@@ -66,7 +64,7 @@ class CreateFlagHandler
         if (array_get($data, 'attributes.reason') === null && array_get($data, 'attributes.reasonDetail') === '') {
             throw new ValidationException([
                 'message' => $this->translator->trans('flarum-flags.forum.post.reason-needed')
-                ]);
+            ]);
         }
 
         Flag::unguard();
