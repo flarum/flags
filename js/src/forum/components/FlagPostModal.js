@@ -95,7 +95,7 @@ export default class FlagPostModal extends Modal {
               className="Button Button--primary Button--block"
               type="submit"
               loading={this.loading}
-              disabled={!this.reason() || this.reason() === 'other' && !this.reasonDetail()}>
+              disabled={!this.reason()}>
               {app.translator.trans('flarum-flags.forum.flag_post.submit_button')}
             </Button>
           </div>

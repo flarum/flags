@@ -32,7 +32,6 @@ class FlagSerializer extends AbstractSerializer
             'reason'       => $flag->reason,
             'reasonDetail' => $flag->reason_detail,
             'createdAt'    => $this->formatDate($flag->created_at),
-            'createdAtDisplay' => date_format($flag->created_at, 'd/m/Y H:i:s'),
         ];
     }
 

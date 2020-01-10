@@ -12,9 +12,11 @@
 namespace Flarum\Flags\Command;
 
 use Flarum\Flags\Flag;
+use Flarum\Foundation\ValidationException;
 use Flarum\Post\CommentPost;
 use Flarum\Post\PostRepository;
 use Flarum\User\AssertPermissionTrait;
+use Symfony\Component\Translation\TranslatorInterface;
 use Tobscure\JsonApi\Exception\InvalidParameterException;
 
 class CreateFlagHandler
@@ -26,18 +28,26 @@ class CreateFlagHandler
      */
     protected $posts;
 
+        /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
     /**
      * @param PostRepository $posts
+     * @param TranslatorInterface $translator
      */
-    public function __construct(PostRepository $posts)
+    public function __construct(PostRepository $posts, TranslatorInterface $translator)
     {
         $this->posts = $posts;
+        $this->translator = $translator;
     }
 
     /**
      * @param CreateFlag $command
      * @return Flag
      * @throws InvalidParameterException
+     * @throws ValidationException
      */
     public function handle(CreateFlag $command)
     {
@@ -52,6 +62,12 @@ class CreateFlagHandler
         }
 
         $this->assertCan($actor, 'flag', $post);
+
+        if (array_get($data, 'attributes.reason') === null && array_get($data, 'attributes.reasonDetail') === '') {
+            throw new ValidationException([
+                'message' => $this->translator->trans('flarum-flags.forum.post.reason-needed')
+                ]);
+        }
 
         Flag::unguard();
 
