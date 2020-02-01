@@ -83,7 +83,7 @@ class AddFlagsApiAttributes
      * @param CommentPost $post
      * @return bool
      */
-    protected function checkFlagOwnPostSetting(User $actor, CommentPost $post):bool
+    protected function checkFlagOwnPostSetting(User $actor, CommentPost $post): bool
     {
         if ($actor->id === $post->user_id) {
             // If $actor is the post author, check to see if the setting is enabled

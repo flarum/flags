@@ -69,7 +69,7 @@ class CreateFlagHandler
 
         $this->assertCan($actor, 'flag', $post);
 
-        if ($actor->id === $post->user_id && !$this->settings->get('flarum-flags.can_flag_own')) {
+        if ($actor->id === $post->user_id && ! $this->settings->get('flarum-flags.can_flag_own')) {
             throw new PermissionDeniedException();
         }
 
