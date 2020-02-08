@@ -21,7 +21,7 @@ class Flag extends AbstractModel
     /**
      * {@inheritdoc}
      */
-    protected $dates = ['created_at'];
+    protected $dates = ['created_at', 'dismissed_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

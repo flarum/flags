@@ -50,6 +50,7 @@ class ListFlagsController extends AbstractListController
         return Flag::whereVisibleTo($actor)
             ->with($this->extractInclude($request))
             ->latest('flags.created_at')
+            ->whereNull('flags.dismissed_at')
             ->groupBy('post_id')
             ->get();
     }

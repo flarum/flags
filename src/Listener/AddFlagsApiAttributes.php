@@ -60,7 +60,7 @@ class AddFlagsApiAttributes
      */
     protected function getFlagCount(User $actor)
     {
-        return Flag::whereVisibleTo($actor)->distinct()->count('flags.post_id');
+        return Flag::whereVisibleTo($actor)->whereNull('flags.dismissed_at')->distinct()->count('flags.post_id');
     }
 
     /**
@@ -69,7 +69,7 @@ class AddFlagsApiAttributes
      */
     protected function getNewFlagCount(User $actor)
     {
-        $query = Flag::whereVisibleTo($actor);
+        $query = Flag::whereVisibleTo($actor)->whereNull('flags.dismissed_at');
 
         if ($time = $actor->read_flags_at) {
             $query->where('flags.created_at', '>', $time);

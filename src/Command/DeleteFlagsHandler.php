@@ -53,7 +53,14 @@ class DeleteFlagsHandler
 
         $this->events->dispatch(new FlagsWillBeDeleted($post, $actor, $command->data));
 
-        $post->flags()->delete();
+        //$post->flags()->delete();
+        $flags = $post->flags()->get();
+        foreach ($flags as $flag) {
+            $flag->dismissed_at = time();
+            $flag->dismissed_by_user_id = $actor->id;
+
+            $flag->save();
+        }
 
         return $post;
     }

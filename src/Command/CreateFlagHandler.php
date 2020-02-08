@@ -83,7 +83,8 @@ class CreateFlagHandler
 
         $flag = Flag::firstOrNew([
             'post_id' => $post->id,
-            'user_id' => $actor->id
+            'user_id' => $actor->id,
+            'dismissed_at' => null
         ]);
 
         $flag->post_id = $post->id;
