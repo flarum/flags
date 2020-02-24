@@ -14,6 +14,7 @@ use Flarum\Flags\Flag;
 use Flarum\Post\PostRepository;
 use Flarum\User\AssertPermissionTrait;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Support\Carbon;
 
 class DeleteFlagsHandler
 {
@@ -53,14 +54,12 @@ class DeleteFlagsHandler
 
         $this->events->dispatch(new FlagsWillBeDeleted($post, $actor, $command->data));
 
-        //$post->flags()->delete();
         $flags = $post->flags()->get();
-        foreach ($flags as $flag) {
-            $flag->dismissed_at = time();
-            $flag->dismissed_by_user_id = $actor->id;
 
-            $flag->save();
-        }
+        $flags->update([
+            'dismissed_at'          => Carbon::now(),
+            'dismissed_by_user_id'  => $actor->id
+        ]);
 
         return $post;
     }
