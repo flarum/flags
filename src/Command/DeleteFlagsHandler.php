@@ -54,7 +54,7 @@ class DeleteFlagsHandler
 
         $this->events->dispatch(new FlagsWillBeDeleted($post, $actor, $command->data));
 
-        $flags = $post->flags()->get();
+        $flags = $post->flags();
 
         $flags->update([
             'dismissed_at'          => Carbon::now(),
