@@ -38,4 +38,12 @@ class Flag extends AbstractModel
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function dismisser()
+    {
+        return $this->belongsTo(User::class, 'dismissed_by_user_id');
+    }
 }

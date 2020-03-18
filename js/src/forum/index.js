@@ -1,7 +1,7 @@
 import app from 'flarum/app';
 import Model from 'flarum/Model';
 
-import Flag from './models/Flag';
+import Flag from '../common/models/Flag';
 import FlagsPage from './components/FlagsPage';
 import addFlagControl from './addFlagControl';
 import addFlagsDropdown from './addFlagsDropdown';

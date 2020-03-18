@@ -30,6 +30,7 @@ class FlagSerializer extends AbstractSerializer
             'reason'       => $flag->reason,
             'reasonDetail' => $flag->reason_detail,
             'createdAt'    => $this->formatDate($flag->created_at),
+            'dismissedAt'  => $this->formatDate($flag->dismissed_at),
         ];
     }
 
@@ -47,5 +48,13 @@ class FlagSerializer extends AbstractSerializer
     protected function user($flag)
     {
         return $this->hasOne($flag, BasicUserSerializer::class);
+    }
+
+    /**
+     * @return \Tobscure\JsonApi\Relationship
+     */
+    protected function dismisser($flag)
+    {
+      return $this->hasOne($flag, BasicUserSerializer::class);
     }
 }

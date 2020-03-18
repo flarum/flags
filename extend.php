@@ -26,7 +26,8 @@ return [
         ->route('/flags', 'flags', AssertRegistered::class),
 
     (new Extend\Frontend('admin'))
-        ->js(__DIR__.'/js/dist/admin.js'),
+        ->js(__DIR__.'/js/dist/admin.js')
+        ->css(__DIR__.'/less/admin.less'),
 
     (new Extend\Routes('api'))
         ->get('/flags', 'flags.index', ListFlagsController::class)

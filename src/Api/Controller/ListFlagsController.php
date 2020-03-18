@@ -13,6 +13,7 @@ use Flarum\Api\Controller\AbstractListController;
 use Flarum\Flags\Api\Serializer\FlagSerializer;
 use Flarum\Flags\Flag;
 use Flarum\User\AssertPermissionTrait;
+use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
@@ -26,11 +27,22 @@ class ListFlagsController extends AbstractListController
     public $serializer = FlagSerializer::class;
 
     /**
+     * @var array
+     */
+    public $sort = ['created_at' => 'asc'];
+
+    /**
+     * @var array
+     */
+    public $sortFields = ['createdAt', 'dismissedAt'];
+
+    /**
      * {@inheritdoc}
      */
     public $include = [
         'user',
         'post',
+        'dismisser',
         'post.user',
         'post.discussion'
     ];
@@ -44,14 +56,27 @@ class ListFlagsController extends AbstractListController
 
         $this->assertRegistered($actor);
 
-        $actor->read_flags_at = time();
-        $actor->save();
+        $onlyDismissed = Arr::get($request->getQueryParams(), 'dismissed', false);
 
-        return Flag::whereVisibleTo($actor)
-            ->with($this->extractInclude($request))
-            ->latest('flags.created_at')
-            ->whereNull('flags.dismissed_at')
-            ->groupBy('post_id')
-            ->get();
+        if (!$onlyDismissed) {
+            $actor->read_flags_at = time();
+            $actor->save();
+        }
+
+        $flag = Flag::whereVisibleTo($actor);
+        $flag->with($this->extractInclude($request));
+        if ($onlyDismissed) {
+            $flag->whereNotNull('flags.dismissed_at');
+        } else {
+            $flag->whereNull('flags.dismissed_at');
+            $flag->groupBy('post_id');
+        }
+
+        $sort = $this->extractSort($request);
+        foreach ($sort as $field => $order) {
+            $flag->orderBy(snake_case($field), $order);
+        }
+
+        return $flag->get();
     }
 }

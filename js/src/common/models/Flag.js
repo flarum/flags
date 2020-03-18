@@ -7,9 +7,11 @@ Object.assign(Flag.prototype, {
   reason: Model.attribute('reason'),
   reasonDetail: Model.attribute('reasonDetail'),
   createdAt: Model.attribute('createdAt', Model.transformDate),
+  dismissedAt: Model.attribute('dismissedAt', Model.transformDate),
 
   post: Model.hasOne('post'),
-  user: Model.hasOne('user')
+  user: Model.hasOne('user'),
+  dismisser: Model.hasOne('dismisser')
 });
 
 export default Flag;

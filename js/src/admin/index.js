@@ -1,10 +1,13 @@
 import { extend } from 'flarum/extend';
 import app from 'flarum/app';
+import addDismissedFlagsPage from './addDismissedFlagsPage';
 import PermissionGrid from 'flarum/components/PermissionGrid';
+import Flag from '../common/models/Flag';
 
 import FlagsSettingsModal from './components/FlagsSettingsModal';
 
 app.initializers.add('flarum-flags', () => {
+  app.store.models.flags = Flag;
   app.extensionSettings['flarum-flags'] = () => app.modal.show(new FlagsSettingsModal());
 
   extend(PermissionGrid.prototype, 'moderateItems', items => {
@@ -22,6 +25,7 @@ app.initializers.add('flarum-flags', () => {
       permission: 'discussion.flagPosts'
     }, 70);
   });
+  addDismissedFlagsPage();
 });
 
 // Expose compat API
