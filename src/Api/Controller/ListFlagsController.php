@@ -66,7 +66,7 @@ class ListFlagsController extends AbstractListController
         $flag = Flag::whereVisibleTo($actor);
         $flag->with($this->extractInclude($request));
         if ($onlyDismissed) {
-            $flag->whereNotNull('flags.dismissed_at');
+            $flag->whereNotNull('flags.dismissed_at')->orderBy('flags.dismissed_at', 'desc');
         } else {
             $flag->whereNull('flags.dismissed_at');
             $flag->groupBy('post_id');
