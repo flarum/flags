@@ -3,6 +3,8 @@ import Component from 'flarum/Component';
 import LoadingIndicator from 'flarum/components/LoadingIndicator';
 import DismissedFlagsModal from './DismissedFlagsModal';
 import humanTime from 'flarum/helpers/humanTime';
+import username from 'flarum/helpers/username';
+import avatar from 'flarum/helpers/avatar';
 
 export default class DismissedFlagsTable extends Component {
   init() {
@@ -38,10 +40,16 @@ export default class DismissedFlagsTable extends Component {
               const flag = app.store.getById('flags', data.id);
               const id = flag.post().discussion().id();
               const near = flag.post().number();
+              const flagUser = flag.post().user();
+              const flagDismisser = flag.dismisser();
 
               return (
                 <tr>
-                  <td>{flag.post().user().username()}</td>
+                  <td>
+                    <a className="DismissedFlagsTable-user" href={this.getUserUrl(flagUser)} config={m.route}>
+                      {avatar(flagUser, { loading: 'lazy' })} {username(flagUser)}
+                    </a>
+                  </td>
                   <td>
                     <a href={app.route('discussion.near', { id, near })}>
                       {flag.post().discussion().title()}
@@ -49,7 +57,11 @@ export default class DismissedFlagsTable extends Component {
                   </td>
                   <td>{humanTime(flag.createdAt())}</td>
                   <td>{humanTime(flag.dismissedAt())}</td>
-                  <td>{flag.dismisser().username()}</td>
+                  <td>
+                    <a className="DismissedFlagsTable-user" href={this.getUserUrl(flagDismisser)} config={m.route}>
+                      {avatar(flagDismisser, { loading: 'lazy' })} {username(flagDismisser)}
+                    </a>
+                  </td>
                   <td>
                     <Button className="Button" onclick={() => app.modal.show(new DismissedFlagsModal({ flag }))}>
                       <i className="fas fa-info-circle"></i>
@@ -62,5 +74,9 @@ export default class DismissedFlagsTable extends Component {
         </table>
       </div>
     );
+  }
+
+  getUserUrl(user) {
+    return app.forum.attribute('baseUrl') + "\/u\/" + username(user);
   }
 }
