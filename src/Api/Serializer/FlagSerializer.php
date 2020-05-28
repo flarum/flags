@@ -55,6 +55,6 @@ class FlagSerializer extends AbstractSerializer
      */
     protected function dismisser($flag)
     {
-      return $this->hasOne($flag, BasicUserSerializer::class);
+        return $this->hasOne($flag, BasicUserSerializer::class);
     }
 }

@@ -58,7 +58,7 @@ class ListFlagsController extends AbstractListController
 
         $onlyDismissed = Arr::get($request->getQueryParams(), 'dismissed', false);
 
-        if (!$onlyDismissed) {
+        if (! $onlyDismissed) {
             $actor->read_flags_at = time();
             $actor->save();
         }
