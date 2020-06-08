@@ -22,39 +22,40 @@
 
 .DismissedFlagsPage-list {
   padding-top: 20px;
+  .DismissedFlagsTable {
+    .DismissedFlagsTable-results {
+      white-space: wrap;
+      width: 100%;
 
-  .DismissedFlagsPage-results {
-    white-space: wrap;
-    width: 100%;
+      td, th {
+        padding: 10px;
+        text-align: left;
+      }
 
-    td, th {
-      padding: 10px;
-      text-align: left;
-    }
+      thead th {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 12px;
+        color: @muted-color;
+        min-width: 140px;
+        border-bottom: 2px solid @control-bg;
+      }
 
-    thead th {
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 12px;
-      color: @muted-color;
-      min-width: 140px;
-      border-bottom: 2px solid @control-bg;
-    }
+      tbody {
+        tr {
+          td, th {
+            border-top: 1px solid @control-bg;
+          }
 
-    tbody {
-      tr {
-        td, th {
-          border-top: 1px solid @control-bg;
-        }
-
-        &:nth-of-type(odd) {
-          background-color: #fcfcfc;
+          &:nth-of-type(odd) {
+            background-color: #fcfcfc;
+          }
         }
       }
-    }
 
-    .DismissedFlagsPage-results-actions {
-      text-align: right;
+      .DismissedFlagsTable-results-actions {
+        text-align: right;
+      }
     }
   }
 }

@@ -25,8 +25,8 @@ export default class DismissedFlagsTable extends Component {
     }
 
     return (
-      <div className="DismissedFlagsPage">
-      <table className="DismissedFlagsPage-results">
+      <div className="DismissedFlagsTable">
+      <table className="DismissedFlagsTable-results">
           <thead>
             <th>{app.translator.trans('flarum-flags.admin.dismissed.fields.username')}</th>
             <th>{app.translator.trans('flarum-flags.admin.dismissed.fields.discussion')}</th>
@@ -62,7 +62,7 @@ export default class DismissedFlagsTable extends Component {
                       {avatar(flagDismisser, { loading: 'lazy' })} {username(flagDismisser)}
                     </a>
                   </td>
-                  <td className="DismissedFlagsPage-results-actions">
+                  <td className="DismissedFlagsTable-results-actions">
                     <Button className="Button" onclick={() => app.modal.show(new DismissedFlagsModal({ flag }))}>
                       <i className="fas fa-info-circle"></i>
                     </Button>
