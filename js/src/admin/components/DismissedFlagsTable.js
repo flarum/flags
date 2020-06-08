@@ -17,6 +17,8 @@ export default class DismissedFlagsTable extends Component {
 
       m.redraw();
     });
+
+    console.log($('time').tooltip())
   }
 
   view() {
@@ -25,8 +27,8 @@ export default class DismissedFlagsTable extends Component {
     }
 
     return (
-      <div className="DismissedFlagsTable">
-        <table>
+      <div className="DismissedFlagsPage">
+      <table className="DismissedFlagsPage-results">
           <thead>
             <th>{app.translator.trans('flarum-flags.admin.dismissed.fields.username')}</th>
             <th>{app.translator.trans('flarum-flags.admin.dismissed.fields.discussion')}</th>
@@ -62,7 +64,7 @@ export default class DismissedFlagsTable extends Component {
                       {avatar(flagDismisser, { loading: 'lazy' })} {username(flagDismisser)}
                     </a>
                   </td>
-                  <td>
+                  <td className="DismissedFlagsPage-results-actions">
                     <Button className="Button" onclick={() => app.modal.show(new DismissedFlagsModal({ flag }))}>
                       <i className="fas fa-info-circle"></i>
                     </Button>
@@ -73,6 +75,8 @@ export default class DismissedFlagsTable extends Component {
           </tbody>
         </table>
       </div>
+
+
     );
   }
 

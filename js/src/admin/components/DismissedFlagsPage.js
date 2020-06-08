@@ -11,7 +11,11 @@ export default class DismissedFlagsPage extends Page {
             <p>{app.translator.trans('flarum-flags.admin.dismissed.description')}</p>
           </div>
         </div>
-        <DismissedFlagsTable />
+        <div className="DismissedFlagsPage-list">
+          <div className="container">
+            <DismissedFlagsTable />
+          </div>
+        </div>
       </div>
     );
   }
