@@ -17,8 +17,6 @@ export default class DismissedFlagsTable extends Component {
 
       m.redraw();
     });
-
-    console.log($('time').tooltip())
   }
 
   view() {
