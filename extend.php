@@ -38,7 +38,10 @@ return [
         ->dateAttribute('read_flags_at'),
 
     (new Extend\Model(Post::class))
-        ->hasMany('flags', Flag::class, 'post_id'),
+        ->relationship('flags', function ($post) {
+            return $post->hasMany(Flag::class, 'post_id')
+                ->whereNull('dismissed_at');
+        }),
 
     function (Dispatcher $events) {
         $events->listen(Serializing::class, Listener\AddFlagsApiAttributes::class);
