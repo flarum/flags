@@ -46,7 +46,7 @@ export default class DismissedFlagsTable extends Component {
               return (
                 <tr>
                   <td>
-                    <a className="DismissedFlagsTable-user" href={this.getUserUrl(flagUser)} config={m.route}>
+                    <a className="DismissedFlagsTable-user" href={this.getUserUrl(flagUser)}>
                       {avatar(flagUser, { loading: 'lazy' })} {username(flagUser)}
                     </a>
                   </td>
@@ -58,7 +58,7 @@ export default class DismissedFlagsTable extends Component {
                   <td>{humanTime(flag.createdAt())}</td>
                   <td>{humanTime(flag.dismissedAt())}</td>
                   <td>
-                    <a className="DismissedFlagsTable-user" href={this.getUserUrl(flagDismisser)} config={m.route}>
+                    <a className="DismissedFlagsTable-user" href={this.getUserUrl(flagDismisser)}>
                       {avatar(flagDismisser, { loading: 'lazy' })} {username(flagDismisser)}
                     </a>
                   </td>
@@ -79,6 +79,6 @@ export default class DismissedFlagsTable extends Component {
   }
 
   getUserUrl(user) {
-    return app.forum.attribute('baseUrl') + "\/u\/" + username(user);
+    return app.forum.attribute('baseUrl') + "\/u\/" + user.username();
   }
 }
