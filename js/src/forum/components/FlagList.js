@@ -7,16 +7,11 @@ import humanTime from 'flarum/helpers/humanTime';
 
 export default class FlagList extends Component {
   init() {
-    /**
-     * Whether or not the notifications are loading.
-     *
-     * @type {Boolean}
-     */
-    this.loading = false;
+    this.state = this.props.state;
   }
 
   view() {
-    const flags = app.cache.flags || [];
+    const flags = this.state.cache;
 
     return (
       <div className="NotificationList FlagList">
@@ -49,36 +44,12 @@ export default class FlagList extends Component {
                   </li>
                 );
               })
-              : !this.loading
+              : !this.state.loading
                 ? <div className="NotificationList-empty">{app.translator.trans('flarum-flags.forum.flagged_posts.empty_text')}</div>
                 : LoadingIndicator.component({className: 'LoadingIndicator--block'})}
           </ul>
         </div>
       </div>
     );
-  }
-
-  /**
-   * Load flags into the application's cache if they haven't already
-   * been loaded.
-   */
-  load() {
-    if (app.cache.flags && !app.session.user.attribute('newFlagCount')) {
-      return;
-    }
-
-    this.loading = true;
-    m.redraw();
-
-    app.store.find('flags')
-      .then(flags => {
-        app.session.user.pushAttributes({newFlagCount: 0});
-        app.cache.flags = flags.sort((a, b) => b.createdAt() - a.createdAt());
-      })
-      .catch(() => {})
-      .then(() => {
-        this.loading = false;
-        m.redraw();
-      });
   }
 }

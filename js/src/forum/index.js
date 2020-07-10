@@ -13,7 +13,9 @@ app.initializers.add('flarum-flags', () => {
 
   app.store.models.flags = Flag;
 
-  app.routes.flags = {path: '/flags', component: <FlagsPage/>};
+  app.routes.flags = { path: '/flags', component: <FlagsPage /> };
+
+  app.flags = new FlagListState(app);
 
   addFlagControl();
   addFlagsDropdown();
@@ -23,5 +25,6 @@ app.initializers.add('flarum-flags', () => {
 // Expose compat API
 import flagsCompat from './compat';
 import { compat } from '@flarum/core/forum';
+import FlagListState from './states/FlagListState';
 
 Object.assign(compat, flagsCompat);
