@@ -64,7 +64,7 @@ class CreateFlagHandler
             throw new InvalidParameterException;
         }
 
-        $actor->can('flag', $post);
+        $actor->assertCan('flag', $post);
 
         if ($actor->id === $post->user_id && ! $this->settings->get('flarum-flags.can_flag_own')) {
             throw new PermissionDeniedException();

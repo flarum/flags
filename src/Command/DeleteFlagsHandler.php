@@ -46,7 +46,7 @@ class DeleteFlagsHandler
 
         $post = $this->posts->findOrFail($command->postId, $actor);
 
-        $actor->can('viewFlags', $post->discussion);
+        $actor->assertCan('viewFlags', $post->discussion);
 
         $this->events->dispatch(new FlagsWillBeDeleted($post, $actor, $command->data));
 
