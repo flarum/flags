@@ -39,7 +39,7 @@ class ListFlagsController extends AbstractListController
     {
         $actor = $request->getAttribute('actor');
 
-        ! $actor->isGuest();
+        $actor->assertRegistered();
 
         $actor->read_flags_at = time();
         $actor->save();
