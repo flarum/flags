@@ -29,7 +29,7 @@ export default class FlagList extends Component {
                     <a href={app.route.post(post)} className="Notification Flag" config={function(element, isInitialized) {
                       m.route.apply(this, arguments);
 
-                      if (!isInitialized) $(element).on('click', () => app.cache.flagIndex = post);
+                      if (!isInitialized) $(element).on('click', () => app.flags.index = post);
                     }}>
                       {avatar(post.user())}
                       {icon('fas fa-flag', {className: 'Notification-icon'})}
