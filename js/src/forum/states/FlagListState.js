@@ -3,7 +3,7 @@ export default class FlagListState {
     this.app = app;
 
     /**
-     * Whether or not the notifications are loading.
+     * Whether or not the flags are loading.
      *
      * @type {Boolean}
      */
