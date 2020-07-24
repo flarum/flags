@@ -3,6 +3,7 @@ import Model from 'flarum/Model';
 
 import Flag from './models/Flag';
 import FlagsPage from './components/FlagsPage';
+import FlagListState from './states/FlagListState';
 import addFlagControl from './addFlagControl';
 import addFlagsDropdown from './addFlagsDropdown';
 import addFlagsToPosts from './addFlagsToPosts';
@@ -25,6 +26,5 @@ app.initializers.add('flarum-flags', () => {
 // Expose compat API
 import flagsCompat from './compat';
 import { compat } from '@flarum/core/forum';
-import FlagListState from './states/FlagListState';
 
 Object.assign(compat, flagsCompat);
