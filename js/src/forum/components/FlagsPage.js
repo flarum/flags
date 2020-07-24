@@ -12,6 +12,8 @@ export default class FlagsPage extends Page {
 
     app.history.push('flags');
 
+    app.flags.load();
+
     this.bodyClass = 'App--flags';
   }
 
