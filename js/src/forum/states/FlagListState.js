@@ -17,16 +17,16 @@ export default class FlagListState {
    * been loaded.
    */
   load() {
-    if (this.cache.length && !app.session.user.attribute('newFlagCount')) {
+    if (this.cache.length && !this.app.session.user.attribute('newFlagCount')) {
       return;
     }
 
     this.loading = true;
     m.redraw();
 
-    app.store.find('flags')
+    this.app.store.find('flags')
       .then(flags => {
-        app.session.user.pushAttributes({ newFlagCount: 0 });
+        this.app.session.user.pushAttributes({ newFlagCount: 0 });
         this.cache = flags.sort((a, b) => b.createdAt() - a.createdAt());
       })
       .catch(() => { })
