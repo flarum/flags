@@ -27,7 +27,10 @@ export default class FlagList extends Component {
 
                 return (
                   <li>
-                    <a route={app.route.post(post)} className="Notification Flag" onclick={() => app.flags.index = post}>
+                    <a route={app.route.post(post)} className="Notification Flag" onclick={e => {
+                      app.flags.index = post;
+                      e.redraw = false;
+                    }}>
                       {avatar(post.user())}
                       {icon('fas fa-flag', {className: 'Notification-icon'})}
                       <span className="Notification-content">
