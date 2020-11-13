@@ -1,9 +1,8 @@
 import app from 'flarum/app';
-import ExtensionData from "flarum/utils/ExtensionData";
 
 app.initializers.add('flarum-flags', () => {
-  new ExtensionData('flarum-flags')
-    .registerData('settings',
+  app.extensionData.load('flarum-flags')
+    .registerSettings(
       {
         'flarum-flags.guidelines_url':
           {
@@ -17,14 +16,14 @@ app.initializers.add('flarum-flags', () => {
           }
       }
     )
-    .registerData('permissions',
+    .registerPermission(
       {
         icon: 'fas fa-flag',
         label: app.translator.trans('flarum-flags.admin.permissions.view_flags_label'),
         permission: 'discussion.viewFlags'
       }, 'moderate', 65)
 
-    .registerData('permissions',
+    .registerPermission(
       {
         icon: 'fas fa-flag',
         label: app.translator.trans('flarum-flags.admin.permissions.flag_posts_label'),
