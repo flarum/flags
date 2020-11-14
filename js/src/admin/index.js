@@ -1,20 +1,19 @@
 import app from 'flarum/app';
 
 app.initializers.add('flarum-flags', () => {
-  app.extensionData.load('flarum-flags')
-    .registerSettings(
-      {
-        'flarum-flags.guidelines_url':
-          {
-            type: 'text',
-            label: app.translator.trans('flarum-flags.admin.settings.guidelines_url_label')
-          },
-        'flarum-flags.can_flag_own':
-          {
-            type: 'boolean',
-            label: app.translator.trans('flarum-flags.admin.settings.flag_own_posts_label')
-          }
-      }
+  app.extensionData.for('flarum-flags')
+    .registerSettings([
+        {
+          setting: 'flarum-flags.guidelines_url',
+          type: 'text',
+          label: app.translator.trans('flarum-flags.admin.settings.guidelines_url_label')
+        },
+        {
+          setting: 'flarum-flags.can_flag_own',
+          type: 'boolean',
+          label: app.translator.trans('flarum-flags.admin.settings.flag_own_posts_label')
+        }
+      ]
     )
     .registerPermission(
       {
