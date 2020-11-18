@@ -12,10 +12,7 @@ namespace Flarum\Flags\Listener;
 use Flarum\Api\Controller;
 use Flarum\Api\Event\WillGetData;
 use Flarum\Api\Event\WillSerializeData;
-use Flarum\Api\Serializer\PostSerializer;
-use Flarum\Event\GetApiRelationship;
 use Flarum\Flags\Api\Controller\CreateFlagController;
-use Flarum\Flags\Api\Serializer\FlagSerializer;
 use Flarum\Post\Event\Deleted;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Eloquent\Collection;
@@ -28,7 +25,6 @@ class AddPostFlagsRelationship
     public function subscribe(Dispatcher $events)
     {
         $events->listen(Deleted::class, [$this, 'postWasDeleted']);
-        $events->listen(GetApiRelationship::class, [$this, 'getApiRelationship']);
         $events->listen(WillGetData::class, [$this, 'includeFlagsRelationship']);
         $events->listen(WillSerializeData::class, [$this, 'prepareApiData']);
     }
@@ -39,17 +35,6 @@ class AddPostFlagsRelationship
     public function postWasDeleted(Deleted $event)
     {
         $event->post->flags()->delete();
-    }
-
-    /**
-     * @param GetApiRelationship $event
-     * @return \Tobscure\JsonApi\Relationship|null
-     */
-    public function getApiRelationship(GetApiRelationship $event)
-    {
-        if ($event->isRelationship(PostSerializer::class, 'flags')) {
-            return $event->serializer->hasMany($event->model, FlagSerializer::class, 'flags');
-        }
     }
 
     /**

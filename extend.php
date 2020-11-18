@@ -8,10 +8,17 @@
  */
 
 use Flarum\Api\Event\Serializing;
+use Flarum\Api\Serializer\CurrentUserSerializer;
+use Flarum\Api\Serializer\ForumSerializer;
+use Flarum\Api\Serializer\PostSerializer;
 use Flarum\Extend;
+use Flarum\Flags\AddCanFlagAttribute;
+use Flarum\Flags\AddFlagsApiAttributes;
+use Flarum\Flags\AddNewFlagCountAttribute;
 use Flarum\Flags\Api\Controller\CreateFlagController;
 use Flarum\Flags\Api\Controller\DeleteFlagsController;
 use Flarum\Flags\Api\Controller\ListFlagsController;
+use Flarum\Flags\Api\Serializer\FlagSerializer;
 use Flarum\Flags\Flag;
 use Flarum\Flags\Listener;
 use Flarum\Forum\Content\AssertRegistered;
@@ -39,11 +46,19 @@ return [
     (new Extend\Model(Post::class))
         ->hasMany('flags', Flag::class, 'post_id'),
 
+    (new Extend\ApiSerializer(PostSerializer::class))
+        ->hasMany('flags', FlagSerializer::class)
+        ->attribute('canFlag', AddCanFlagAttribute::class),
+
+    (new Extend\ApiSerializer(CurrentUserSerializer::class))
+        ->attribute('newFlagCount', AddNewFlagCountAttribute::class),
+
+    (new Extend\ApiSerializer(ForumSerializer::class))
+        ->mutate(AddFlagsApiAttributes::class),
+
     new Extend\Locales(__DIR__.'/locale'),
 
     function (Dispatcher $events) {
-        $events->listen(Serializing::class, Listener\AddFlagsApiAttributes::class);
-
         $events->subscribe(Listener\AddPostFlagsRelationship::class);
     },
 ];
