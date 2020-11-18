@@ -7,7 +7,6 @@
  * LICENSE file that was distributed with this source code.
  */
 
-use Flarum\Api\Event\Serializing;
 use Flarum\Api\Serializer\CurrentUserSerializer;
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Api\Serializer\PostSerializer;
