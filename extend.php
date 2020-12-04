@@ -55,6 +55,9 @@ return [
     (new Extend\ApiSerializer(ForumSerializer::class))
         ->mutate(AddFlagsApiAttributes::class),
 
+    (new Extend\Settings())
+        ->serializeToForum('guidelinesUrl', 'flarum-flags.guidelines_url'),
+
     new Extend\Locales(__DIR__.'/locale'),
 
     function (Dispatcher $events) {

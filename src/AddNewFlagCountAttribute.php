@@ -14,7 +14,7 @@ use Flarum\User\User;
 
 class AddNewFlagCountAttribute
 {
-    public function __invoke(array $attributes, User $user, CurrentUserSerializer $serializer)
+    public function __invoke(CurrentUserSerializer $serializer, User $user)
     {
         return (int) $this->getNewFlagCount($user);
     }

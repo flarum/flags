@@ -29,7 +29,7 @@ class AddCanFlagAttribute
         $this->settings = $settings;
     }
 
-    public function __invoke(array $attributes, Post $post, PostSerializer $serializer)
+    public function __invoke(PostSerializer $serializer, Post $post)
     {
         return $serializer->getActor()->can('flag', $post) && $this->checkFlagOwnPostSetting($serializer->getActor(), $post);
     }

@@ -28,15 +28,15 @@ class AddFlagsApiAttributes
         $this->settings = $settings;
     }
 
-    public function __invoke(array $attributes, $model, ForumSerializer $serializer)
+    public function __invoke(ForumSerializer $serializer)
     {
-        $attributes['canViewFlags'] = $serializer->getActor()->hasPermissionLike('discussion.viewFlags');
+        $attributes = [
+            'canViewFlags' => $serializer->getActor()->hasPermissionLike('discussion.viewFlags')
+        ];
 
         if ($attributes['canViewFlags']) {
             $attributes['flagCount'] = (int) $this->getFlagCount($serializer->getActor());
         }
-
-        $attributes['guidelinesUrl'] = $this->settings->get('flarum-flags.guidelines_url');
 
         return $attributes;
     }
