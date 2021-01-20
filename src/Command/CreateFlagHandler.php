@@ -46,6 +46,8 @@ class CreateFlagHandler
     /**
      * @param PostRepository $posts
      * @param TranslatorInterface $translator
+     * @param SettingsRepositoryInterface $settings
+     * @param Dispatcher $events
      */
     public function __construct(PostRepository $posts, TranslatorInterface $translator, SettingsRepositoryInterface $settings, Dispatcher $events)
     {
