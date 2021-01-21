@@ -25,19 +25,12 @@ class Created
     public $actor;
 
     /**
-     * @var array
-     */
-    public $data;
-
-    /**
      * @param Flag $flag
      * @param User $actor
-     * @param array $data
      */
-    public function __construct(Flag $flag, User $actor, array $data = [])
+    public function __construct(Flag $flag, User $actor)
     {
         $this->flag = $flag;
         $this->actor = $actor;
-        $this->data = $data;
     }
 }

@@ -16,7 +16,7 @@ use Flarum\Post\CommentPost;
 use Flarum\Post\PostRepository;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\Exception\PermissionDeniedException;
-use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Arr;
 use Symfony\Component\Translation\TranslatorInterface;
 use Tobscure\JsonApi\Exception\InvalidParameterException;
@@ -103,7 +103,7 @@ class CreateFlagHandler
 
         $flag->save();
 
-        $this->events->dispatch(new Created($flag, $actor, $command->data));
+        $this->events->dispatch(new Created($flag, $actor));
 
         return $flag;
     }

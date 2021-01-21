@@ -13,7 +13,7 @@ use Flarum\Flags\Event\Deleting;
 use Flarum\Flags\Event\FlagsWillBeDeleted;
 use Flarum\Flags\Flag;
 use Flarum\Post\PostRepository;
-use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Events\Dispatcher;
 
 class DeleteFlagsHandler
 {
@@ -49,10 +49,11 @@ class DeleteFlagsHandler
 
         $actor->assertCan('viewFlags', $post->discussion);
 
+        // remove beta 17
         $this->events->dispatch(new FlagsWillBeDeleted($post, $actor, $command->data));
 
-        foreach ($post->flags() as $flag) {
-            $this->events->dispatch(new Deleting($flag, $actor, $command->data));
+        foreach ($post->flags as $flag) {
+            $this->events->dispatch(new Deleting($flag, $actor));
         }
 
         $post->flags()->delete();
