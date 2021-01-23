@@ -103,7 +103,7 @@ class CreateFlagHandler
 
         $flag->save();
 
-        $this->events->dispatch(new Created($flag, $actor));
+        $this->events->dispatch(new Created($flag, $actor, $data));
 
         return $flag;
     }
