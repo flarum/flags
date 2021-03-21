@@ -50,6 +50,10 @@ class ListFlagsController extends AbstractListController
             ->groupBy('post_id')
             ->get();
 
+        if (in_array('post.user', $include)) {
+            $include[] = 'post.user.groups';
+        }
+
         $this->loadRelations($flags, $include);
 
         return $flags;
