@@ -49,6 +49,9 @@ class DeleteFlagsHandler
 
         $actor->assertCan('viewFlags', $post->discussion);
 
+        // remove beta 17
+        $this->events->dispatch(new FlagsWillBeDeleted($post, $actor, $command->data));
+
         foreach ($post->flags as $flag) {
             $this->events->dispatch(new Deleting($flag, $actor, $command->data));
         }
