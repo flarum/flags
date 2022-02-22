@@ -10,6 +10,7 @@
 namespace Flarum\Flags\Command;
 
 use Flarum\Flags\Event\Deleting;
+use Flarum\Flags\Event\FlagsWillBeDeleted;
 use Flarum\Flags\Flag;
 use Flarum\Post\PostRepository;
 use Illuminate\Events\Dispatcher;
