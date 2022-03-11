@@ -31,7 +31,7 @@ class AddFlagsApiAttributes
     public function __invoke(ForumSerializer $serializer)
     {
         $attributes = [
-            'canViewFlags' => $serializer->getActor()->hasPermissionLike('discussion.viewFlags')
+            'canViewFlags' => $serializer->getActor()->hasPermissionLike('discussion.viewFlags'),
         ];
 
         if ($attributes['canViewFlags']) {
@@ -43,6 +43,7 @@ class AddFlagsApiAttributes
 
     /**
      * @param User $actor
+     *
      * @return int
      */
     protected function getFlagCount(User $actor)

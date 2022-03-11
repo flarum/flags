@@ -33,8 +33,8 @@ class DeleteFlags
     public $data;
 
     /**
-     * @param int $postId The ID of the post to delete flags for.
-     * @param User $actor The user performing the action.
+     * @param int   $postId The ID of the post to delete flags for.
+     * @param User  $actor  The user performing the action.
      * @param array $data
      */
     public function __construct($postId, User $actor, array $data = [])

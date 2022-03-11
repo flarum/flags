@@ -21,6 +21,7 @@ class AddNewFlagCountAttribute
 
     /**
      * @param User $actor
+     *
      * @return int
      */
     protected function getNewFlagCount(User $actor)

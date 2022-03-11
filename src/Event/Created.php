@@ -30,8 +30,8 @@ class Created
     public $data;
 
     /**
-     * @param Flag $flag
-     * @param User $actor
+     * @param Flag  $flag
+     * @param User  $actor
      * @param array $data
      */
     public function __construct(Flag $flag, User $actor, array $data = [])

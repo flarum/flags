@@ -31,7 +31,7 @@ class CreateFlagController extends AbstractCreateController
     public $include = [
         'post',
         'post.flags',
-        'user'
+        'user',
     ];
 
     /**

@@ -44,10 +44,10 @@ class CreateFlagHandler
     protected $events;
 
     /**
-     * @param PostRepository $posts
-     * @param TranslatorInterface $translator
+     * @param PostRepository              $posts
+     * @param TranslatorInterface         $translator
      * @param SettingsRepositoryInterface $settings
-     * @param Dispatcher $events
+     * @param Dispatcher                  $events
      */
     public function __construct(PostRepository $posts, TranslatorInterface $translator, SettingsRepositoryInterface $settings, Dispatcher $events)
     {
@@ -59,9 +59,11 @@ class CreateFlagHandler
 
     /**
      * @param CreateFlag $command
-     * @return Flag
+     *
      * @throws InvalidParameterException
      * @throws ValidationException
+     *
+     * @return Flag
      */
     public function handle(CreateFlag $command)
     {
@@ -71,19 +73,19 @@ class CreateFlagHandler
         $postId = Arr::get($data, 'relationships.post.data.id');
         $post = $this->posts->findOrFail($postId, $actor);
 
-        if (! ($post instanceof CommentPost)) {
-            throw new InvalidParameterException;
+        if (!($post instanceof CommentPost)) {
+            throw new InvalidParameterException();
         }
 
         $actor->assertCan('flag', $post);
 
-        if ($actor->id === $post->user_id && ! $this->settings->get('flarum-flags.can_flag_own')) {
+        if ($actor->id === $post->user_id && !$this->settings->get('flarum-flags.can_flag_own')) {
             throw new PermissionDeniedException();
         }
 
         if (Arr::get($data, 'attributes.reason') === null && Arr::get($data, 'attributes.reasonDetail') === '') {
             throw new ValidationException([
-                'message' => $this->translator->trans('flarum-flags.forum.flag_post.reason_missing_message')
+                'message' => $this->translator->trans('flarum-flags.forum.flag_post.reason_missing_message'),
             ]);
         }
 
@@ -91,7 +93,7 @@ class CreateFlagHandler
 
         $flag = Flag::firstOrNew([
             'post_id' => $post->id,
-            'user_id' => $actor->id
+            'user_id' => $actor->id,
         ]);
 
         $flag->post_id = $post->id;
